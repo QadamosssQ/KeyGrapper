@@ -11,9 +11,10 @@ KeyGrapper is a keylogger application with a WPF (Windows Presentation Foundatio
 ## Installation
 
 1. Clone the repository:
-2. Open folder [KeyGrapper/KeyGrapper/release](KeyGrapper/release)
-3. Run [KeyGrapper.exe](KeyGrapper/release/KeyGrapper.exe)
-
 ```bash
 git clone https://github.com/QadamosssQ/KeyGrapper.git
+```
+3. Open folder [KeyGrapper/KeyGrapper/release](KeyGrapper/release)
+4. Run [KeyGrapper.exe](KeyGrapper/release/KeyGrapper.exe)
+
 
