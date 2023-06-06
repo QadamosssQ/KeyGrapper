@@ -26,7 +26,7 @@ If some reason you want to stop app until time ends
 2. Click on KeyGrapper.exe then click end task or sth
 
 ## Soon update 💫	
-! Improve end task communicate <br>
+Improve end task communicate <br>
 I will maybe add a comunication with sql database server to store all keys for users 
 
 ## License
