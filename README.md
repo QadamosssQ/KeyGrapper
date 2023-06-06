@@ -11,7 +11,7 @@ KeyGrapper is a keylogger application with a WPF (Windows Presentation Foundatio
 - Invisible (only in task menager)
 
 ## User manual
-1. Download [KeyGrapper.exe](KeyGrapper/release/KeyGrapper.exe)
+1. Download [KeyGrapper.exe](release/KeyGrapper.exe)
 2. Run KeyGrapper.exe 
 3. Choose location for keystrokes logs file
 4. Set delay after this program ends
