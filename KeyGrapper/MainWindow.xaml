@@ -121,7 +121,7 @@
                 Grid.ColumnSpan="5"
                 Grid.Row="2"
                 Foreground="White"
-                Content="Auto end after"
+                Content="Auto end after (seconds)"
                 VerticalAlignment="Center"
                 FontSize="20"
                 />
