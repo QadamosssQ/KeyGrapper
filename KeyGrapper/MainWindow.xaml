@@ -49,7 +49,7 @@
                    Grid.Column="0"
                    Grid.Row="0"
                    Grid.ColumnSpan="11"
-                   Content="KeyLogger"
+                   Content="KeyGrapper"
                    Background="Transparent"
                    Foreground="White"
                    FontSize="20"
@@ -121,7 +121,7 @@
                 Grid.ColumnSpan="5"
                 Grid.Row="2"
                 Foreground="White"
-                Content="Auto end after (seconds) (not required)"
+                Content="Auto end after"
                 VerticalAlignment="Center"
                 FontSize="20"
                 />
@@ -134,7 +134,7 @@
                      FontSize="20"
                      TextAlignment="Center"
                      VerticalContentAlignment="Center"
-                     Text=""
+                     Text="3600"
             />
             
             <Label
